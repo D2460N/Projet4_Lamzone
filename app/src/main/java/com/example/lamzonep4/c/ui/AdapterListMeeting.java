@@ -1,5 +1,6 @@
 package com.example.lamzonep4.c.ui;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.lamzonep4.R;
 
 import com.example.lamzonep4.c.events.DeleteMeetingEvent;
+import com.example.lamzonep4.c.events.ShowMeetingDetailsEvent;
 import com.example.lamzonep4.c.model.Meeting;
 
-import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AdapterListMeeting extends RecyclerView.Adapter <AdapterListMeeting.ViewHolder> {
+    private static final String BUNDLE_MEETING = "BUNDLE_MEETING";
     List<Meeting> mMeeting ;
 
     public AdapterListMeeting(List<Meeting> mMeeting) {
@@ -80,7 +83,7 @@ public class AdapterListMeeting extends RecyclerView.Adapter <AdapterListMeeting
             @Override
             public void onClick(View view) {
 
-                EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
+               getDefault().post(new DeleteMeetingEvent(meeting));
             }
         });
 
@@ -89,6 +92,13 @@ public class AdapterListMeeting extends RecyclerView.Adapter <AdapterListMeeting
     @Override
     public int getItemCount() {
         return mMeeting.size();
+    }
+
+    @Subscribe
+    public void onMeetinhDetails(ShowMeetingDetailsEvent) {
+        Intent MeetingDetailsIntent = new Intent(this, MeetingDetailsActivity.class);
+        meetingDetailsIntent.putExtra(BUNDLE_MEETING, .meeting);
+        startActivity(meetingDetailsIntent);
     }
 
 }

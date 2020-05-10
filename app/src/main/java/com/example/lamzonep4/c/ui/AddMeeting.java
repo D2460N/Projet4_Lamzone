@@ -117,7 +117,7 @@ private MeetingApiService mApiService ;
 
                 if (subject.getText().toString().isEmpty() && text_add_mail.getText().toString().isEmpty()) {
 
-             Toast.makeText(getApplicationContext(),"Subject et Email Champs Obligatoir " , Toast.LENGTH_LONG).show();
+             Toast.makeText(getApplicationContext(),"Subject et Email Champs Obligatoire " , Toast.LENGTH_LONG).show();
                 }
 
 
